@@ -29,6 +29,64 @@ const camera = new THREE.PerspectiveCamera(
   20000
 );
 
+//Loading Screen
+
+let progress = 0;
+const loadingContainer = document.querySelector(".loading-container");
+const progressElement = document.getElementById("progress");
+const loadingText = document.querySelector(".loading-text");
+const planets = document.querySelectorAll(".planet");
+
+const loadingMessages = [
+  "Calculating orbits...",
+  "Generating celestial bodies...",
+  "Applying gravitational forces...",
+  "Finalizing planetary textures...",
+  "Ready for launch!",
+];
+
+const orbitIntervals = [];
+
+// Animate planets in orbits
+planets.forEach((planet, index) => {
+  const radius = [60, 80, 100][index];
+  let angle = 0;
+
+  orbitIntervals[index] = setInterval(() => {
+    angle += 0.01;
+    const x = 100 + radius * Math.cos(angle);
+    const y = 100 + radius * Math.sin(angle);
+    planet.style.left = `${x}px`;
+    planet.style.top = `${y}px`;
+  }, 20);
+});
+
+// Update progress
+const loadingInterval = setInterval(() => {
+  progress += Math.random() * 5;
+  if (progress > 100) progress = 100;
+  progressElement.style.width = `${progress}%`;
+
+  // Update loading text
+  if (progress < 20) loadingText.textContent = loadingMessages[0];
+  else if (progress < 40) loadingText.textContent = loadingMessages[1];
+  else if (progress < 60) loadingText.textContent = loadingMessages[2];
+  else if (progress < 80) loadingText.textContent = loadingMessages[3];
+  else loadingText.textContent = loadingMessages[4];
+
+  if (progress === 100) {
+    clearInterval(loadingInterval);
+    orbitIntervals.forEach((interval) => clearInterval(interval));
+
+    setTimeout(() => {
+      loadingContainer.style.display = "none";
+      setTimeout(() => {}, 500);
+    }, 1000);
+  }
+}, 200);
+
+//
+
 const cubeTextureLoader = new THREE.CubeTextureLoader();
 scene.background = cubeTextureLoader.load([
   starsTexture,
@@ -325,3 +383,4 @@ document.querySelector("#volumeIcon").addEventListener("click", () => {
     audio.pause();
   }
 });
+//

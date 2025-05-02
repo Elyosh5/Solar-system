@@ -2,13 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/public/icon.jpg" />
+    <link rel="icon" type="image/svg+xml" href="./public/icon.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
     <title>solar system</title>
   </head>
   <body>
     <div id="app"></div>
+
+    <div class="loading-container">
+      <div class="solar-loader">
+        <div class="sun"></div>
+        <!-- Orbits -->
+        <div class="orbit" style="width: 120px; height: 120px"></div>
+        <div class="orbit" style="width: 160px; height: 160px"></div>
+        <div class="orbit" style="width: 200px; height: 200px"></div>
+        <!-- Planets -->
+        <div
+          class="planet"
+          style="
+            width: 10px;
+            height: 10px;
+            background: #b5a642;
+            top: 50%;
+            left: 20px;
+          "
+        ></div>
+        <div
+          class="planet"
+          style="
+            width: 15px;
+            height: 15px;
+            background: #e28743;
+            top: 20px;
+            left: 50%;
+          "
+        ></div>
+        <div
+          class="planet"
+          style="
+            width: 12px;
+            height: 12px;
+            background: #3a7bd5;
+            top: 50%;
+            left: 180px;
+          "
+        ></div>
+      </div>
+      <div class="loading-text">Initializing Solar System</div>
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+    </div>
     <div class="buttons">
       <button id="slowDown" onclick="">
         <svg width="24" height="24" viewBox="0 0 24 20" fill="black">
