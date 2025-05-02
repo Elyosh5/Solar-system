@@ -168,8 +168,13 @@ createOrbit(3200); // Pluto
 
 let isStarted = false;
 
+const svg = document.getElementById("playButton");
 function start() {
-  isStarted = true;
+  isStarted = !isStarted;
+
+  svg.innerHTML = isStarted
+    ? '<rect x="6" y="6" width="12" height="12" />'
+    : ' <polygon points="6,4 20,12 6,20" />';
 }
 function stop() {
   isStarted = false;
@@ -267,7 +272,6 @@ function animate() {
 renderer.setAnimationLoop(animate);
 
 document.querySelector("#start").addEventListener("click", start);
-document.querySelector("#stop").addEventListener("click", stop);
 document
   .querySelector("#speedUp")
   .addEventListener("click", handleSpeedUpClick);
